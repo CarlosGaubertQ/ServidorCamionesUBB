@@ -9,6 +9,20 @@ export async function getCamiones(req, res) {
   }
 }
 
+export async function getCamionByPatente(req, res) {
+  const {patente} = req.params
+  try {
+    const camion = await Camion.findAll({
+      where:{
+        PATENTE_CAMION: patente
+      }
+    });
+    res.status(200).json({ data: camion });
+  } catch (error) {
+    res.status(500).send({ data: error });
+  }
+}
+
 export async function addCamion(req, res) {
   const {
     PATENTE_CAMION,

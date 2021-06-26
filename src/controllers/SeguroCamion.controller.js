@@ -39,6 +39,11 @@ export async function addSeguroCamion(req, res){
 
 }
 
+export async function getCamionByPatente(req, res){
+  const { patente, fecha } = req.params;
+  
+}
+
 export async function updateSeguroCamion(req, res){
     const { patente, fecha } = req.params;
     const { VALOR_SEGURO } = req.body;
