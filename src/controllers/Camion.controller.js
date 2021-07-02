@@ -10,12 +10,12 @@ export async function getCamiones(req, res) {
 }
 
 export async function getCamionByPatente(req, res) {
-  const {patente} = req.params
+  const { patente } = req.params;
   try {
     const camion = await Camion.findAll({
-      where:{
-        PATENTE_CAMION: patente
-      }
+      where: {
+        PATENTE_CAMION: patente,
+      },
     });
     res.status(200).json({ data: camion });
   } catch (error) {
@@ -190,12 +190,10 @@ export async function updateCamion(req, res) {
       NRO_EJES,
     });
 
-    return res
-      .status(200)
-      .json({
-        message: "Camion ha sido actualizado correctamente",
-        data: camionUpdate,
-      });
+    return res.status(200).json({
+      message: "Camion ha sido actualizado correctamente",
+      data: camionUpdate,
+    });
   }
 }
 
@@ -217,11 +215,9 @@ export async function deleteCamion(req, res) {
       .status(200)
       .json({ message: "Camión eliminado correctamente", count: deleteCamion });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Algo ocurrio cuando se queria eliminar este camión",
-        count: 0,
-      });
+    res.status(500).json({
+      message: "Algo ocurrio cuando se queria eliminar este camión",
+      count: 0,
+    });
   }
 }

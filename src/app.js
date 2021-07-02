@@ -8,6 +8,10 @@ import odometro from './routes/odometro.routes'
 import seguroCamion from './routes/seguroCamion.routes'
 import cliente from './routes/cliente.routes'
 import boletaCombustible from './routes/boletaCombustible.routes'
+import banco from './routes/banco.routes'
+import carro from './routes/carro.routes'
+import chofer from './routes/chofer.routes'
+import oTMantencion from './routes/oTMantencion.routes'
 //middlewares
 app.use(json())
 app.use(morgan('dev'))
@@ -19,8 +23,12 @@ app.set('port', process.env.PORT || 4000)
 
 //routes
 app.use('/api/camion',camion)
+app.use('/api/carro',carro)
 app.use('/api/odometro',odometro )
 app.use('/api/segurocamion', seguroCamion)
 app.use('/api/cliente',cliente)
 app.use('/api/boletacombustible',boletaCombustible)
+app.use('/api/banco',banco)
+app.use('/api/chofer',chofer)
+app.use('/api/otmantencion',oTMantencion)
 export default app;

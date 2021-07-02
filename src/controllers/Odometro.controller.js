@@ -1,8 +1,26 @@
 import Odometro from "../models/Odometro";
-
+import moment from 'moment'
 export async function getOdometro(req, res) {
   try {
-    const odometro = await Odometro.findAll();
+    const odometro = await Odometro.findAll({
+     
+    });
+    res.status(200).json({ data: odometro });
+  } catch (error) {
+    res.status(500).send({ data: error });
+  }
+}
+
+export async function getOdometroByPatente(req, res) {
+  const { patente} = req.params
+  
+  try {
+    const odometro = await Odometro.findAll({
+      where:{
+        PATENTE_CAMION: patente
+      }
+    });
+    
     res.status(200).json({ data: odometro });
   } catch (error) {
     res.status(500).send({ data: error });
@@ -10,14 +28,16 @@ export async function getOdometro(req, res) {
 }
 
 export async function addOdometro(req, res) {
-  const { PATENTE_CAMION, ODOMETRO_CAMION, FECHA_ODOMETRO } = req.body;
-
+  const { PATENTE_CAMION, ODOMETRO_CAMION, FECHA_ODOMETRO } = req.body; 
+  
+  const formatFecha = moment(FECHA_ODOMETRO,"YYYY-MM-DD").format("YYYY-MM-DD")
+  console.log(FECHA_ODOMETRO,formatFecha)
   try {
     const newOdometro = await Odometro.create(
       {
         PATENTE_CAMION,
         ODOMETRO_CAMION,
-        FECHA_ODOMETRO,
+        FECHA_ODOMETRO: formatFecha,
       },
       { fields: ["PATENTE_CAMION", "ODOMETRO_CAMION", "FECHA_ODOMETRO"] }
     );
@@ -38,7 +58,7 @@ export async function addOdometro(req, res) {
   } catch (error) {
     res.status(500).send({
       message: "Ya existe el registro del odómetro en esta fecha",
-      data: [],
+      data: [error],
     });
   }
 }
@@ -46,24 +66,30 @@ export async function addOdometro(req, res) {
 export async function updateOdometro(req, res) {
   const { patente, fecha } = req.params;
   const { ODOMETRO_CAMION } = req.body;
-
-  const odometro = await Odometro.findOne({
-    where: {
-      PATENTE_CAMION: patente,
-      FECHA_ODOMETRO: fecha,
-    },
-  });
-
-  if (odometro === null) {
-    res.status(200).json({ message: "No se encontro este odometro", data: [] });
-  } else {
-    const odometroUpdate = await odometro.update({ ODOMETRO_CAMION });
-
-    return res.status(200).json({
-      message: "Odómetro ha sido actualizado correctamente",
-      data: odometroUpdate,
+  
+  try {
+    const odometro = await Odometro.findOne({
+      where: {
+        PATENTE_CAMION: patente,
+        FECHA_ODOMETRO: new Date(fecha),
+      },
     });
+  
+    if (odometro === null) {
+      res.status(200).json({ message: "No se encontro este odometro", data: ["eqweqw"] });
+    } else {
+      const odometroUpdate = await odometro.update({ ODOMETRO_CAMION });
+  
+      return res.status(200).json({
+        message: "Odómetro ha sido actualizado correctamente",
+        data: odometroUpdate,
+      });
+    }  
+  } catch (error) {
+    console.log(error)
+    res.status(400).json({ message: "No se encontro este odometro", data: [error] });
   }
+  
 }
 
 export async function deleteOdometro(req, res) {
@@ -72,7 +98,7 @@ export async function deleteOdometro(req, res) {
     const deleteOdometro = await Odometro.destroy({
       where: {
         PATENTE_CAMION: patente,
-        FECHA_ODOMETRO: fecha,
+        FECHA_ODOMETRO: new Date(fecha),
       },
     });
 
