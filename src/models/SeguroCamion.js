@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
-
+import moment from "moment";
 const SeguroCamion = sequelize.define(
   "seguro_camion",
   {
@@ -14,6 +14,9 @@ const SeguroCamion = sequelize.define(
     FECHA_PAGO_SEGURO: {
       type: Sequelize.DATE,
       primaryKey: true,
+      get: function() {
+        return moment(this.getDataValue('FECHA_PAGO_SEGURO')).add(1,'days').format('DD-MM-YYYY')
+      }
     },
   },
   {

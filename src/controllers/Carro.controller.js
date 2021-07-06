@@ -1,5 +1,5 @@
 import Carro from "../models/Carro";
-
+import moment from 'moment'
 export async function getCarro(req, res) {
   try {
     const carro = await Carro.findAll();
@@ -10,7 +10,7 @@ export async function getCarro(req, res) {
 }
 
 export async function addCarro(req, res) {
-  const [
+  const {
     PATENTE_CARRO,
     TIPO_DE_CARRO,
     FECHA_DE_COMPRA_CARRO,
@@ -19,14 +19,18 @@ export async function addCarro(req, res) {
     MARCA_CARRO,
     OBSERVACION_CARRO,
     FECHA_REV_TECNICA,
-  ] = req.body;
+  } = req.body;
 
+  
   try {
+    const formatFecha = moment(FECHA_DE_COMPRA_CARRO, "YYYY-MM-DD").format(
+      "YYYY-MM-DD"
+    );
     const newCarro = await Carro.create(
       {
         PATENTE_CARRO,
         TIPO_DE_CARRO,
-        FECHA_DE_COMPRA_CARRO,
+        FECHA_DE_COMPRA_CARRO: formatFecha,
         VALOR_CARRO,
         EJE_CARRO,
         MARCA_CARRO,
@@ -60,8 +64,8 @@ export async function addCarro(req, res) {
 }
 
 export async function updateCarro(req, res) {
-  const [patente] = req.params;
-  const [
+  const {patente} = req.params;
+  const {
     TIPO_DE_CARRO,
     FECHA_DE_COMPRA_CARRO,
     VALOR_CARRO,
@@ -69,7 +73,11 @@ export async function updateCarro(req, res) {
     MARCA_CARRO,
     OBSERVACION_CARRO,
     FECHA_REV_TECNICA,
-  ] = req.body;
+   } = req.body;
+
+   const formatFecha = moment(FECHA_DE_COMPRA_CARRO, "YYYY-MM-DD").format(
+    "YYYY-MM-DD"
+  );
 
   const carro = await Carro.findOne({
     where: {
@@ -82,7 +90,7 @@ export async function updateCarro(req, res) {
   } else {
     const carroUpdate = await carro.update({
       TIPO_DE_CARRO,
-      FECHA_DE_COMPRA_CARRO,
+      FECHA_DE_COMPRA_CARRO: formatFecha,
       VALOR_CARRO,
       EJE_CARRO,
       MARCA_CARRO,
@@ -98,7 +106,7 @@ export async function updateCarro(req, res) {
 }
 
 export async function deleteCarro(req, res) {
-  const [patente] = req.params;
+  const {patente} = req.params;
   try {
     const deleteCarro = await Carro.destroy({
       where: {
