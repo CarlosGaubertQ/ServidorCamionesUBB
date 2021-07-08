@@ -10,7 +10,7 @@ export async function getCliente(req, res) {
 }
 
 export async function addCliente(req, res) {
-  const [
+  const {
     CODIGO_CLIENTE,
     NOMBRE_CLIENTE,
     DIRECCION_CLIENTE,
@@ -19,10 +19,10 @@ export async function addCliente(req, res) {
     OBSERVACION_CLIENTE,
     GIRO_CLIENTE,
     DIGITO_CLIENTE,
-  ] = req.body;
+   } = req.body;
 
   try {
-    const newCliente = Cliente.create(
+    const newCliente = await Cliente.create(
       {
         CODIGO_CLIENTE,
         NOMBRE_CLIENTE,
@@ -64,16 +64,15 @@ export async function addCliente(req, res) {
 }
 
 export async function updateCliente(req, res) {
-  const [rut] = req.params;
-  const [
+  const {rut} = req.params;
+  const {
     NOMBRE_CLIENTE,
     DIRECCION_CLIENTE,
     FAX_CLIENTE,
     FONO_CLIENTE,
     OBSERVACION_CLIENTE,
-    GIRO_CLIENTE,
-    DIGITO_CLIENTE,
-  ] = req.body;
+    GIRO_CLIENTE
+   } = req.body;
   const cliente = await Cliente.findOne({
     where: {
       CODIGO_CLIENTE: rut,
@@ -89,7 +88,6 @@ export async function updateCliente(req, res) {
       FONO_CLIENTE,
       OBSERVACION_CLIENTE,
       GIRO_CLIENTE,
-      DIGITO_CLIENTE,
     });
 
     return res.status(200).json({
@@ -100,7 +98,7 @@ export async function updateCliente(req, res) {
 }
 
 export async function deleteCliente(req, res) {
-  const [rut] = req.params;
+  const {rut} = req.params;
 
   try {
     const deleteCliente = await Cliente.destroy({

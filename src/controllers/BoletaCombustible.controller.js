@@ -1,5 +1,5 @@
 import BoletaCombustible from "../models/BoletaCombustible";
-
+import moment from "moment";
 export async function getBoletaCombustible(req, res) {
   try {
     const boletaCombustible = await BoletaCombustible.findAll();
@@ -10,7 +10,7 @@ export async function getBoletaCombustible(req, res) {
 }
 
 export async function addBoletaCombustible(req, res) {
-  const [
+  const {
     NUMERO_BOLETA_COMBUSTIBLE,
     NUMERO_GUIA,
     PROVEEDOR_COMBUSTIBLE,
@@ -23,7 +23,10 @@ export async function addBoletaCombustible(req, res) {
     CODIGO_TARJETA,
     ODOMETRO,
     FECHA_BOLETA,
-  ] = req.body;
+   } = req.body;
+
+  
+
 
   try {
     const newBoletaCombustible = await BoletaCombustible.create(
@@ -70,6 +73,7 @@ export async function addBoletaCombustible(req, res) {
       });
     }
   } catch (error) {
+    console.log(error)
     return res
       .status(400)
       .send({ message: "Ya existe esta boleta de combustible", data: [] });
@@ -77,8 +81,8 @@ export async function addBoletaCombustible(req, res) {
 }
 
 export async function updateBoletaCombustible(req, res) {
-  const [numBoleta] = req.params;
-  const [
+  const {numboleta} = req.params;
+  const {
     NUMERO_GUIA,
     PROVEEDOR_COMBUSTIBLE,
     MONTO_COMBUSTIBLE,
@@ -90,18 +94,18 @@ export async function updateBoletaCombustible(req, res) {
     CODIGO_TARJETA,
     ODOMETRO,
     FECHA_BOLETA,
-  ] = req.body;
-
+   } = req.body;
+ 
   const boletaCombustible = await BoletaCombustible.findOne({
     where: {
-      NUMERO_BOLETA_COMBUSTIBLE: numBoleta,
+      NUMERO_BOLETA_COMBUSTIBLE: numboleta,
     },
   });
 
   if (boletaCombustible === null) {
     res.status(200).json({ message: "No se encontro esta boleta", data: [] });
   } else {
-    const boletaCombustibleUpdate = await BoletaCombustible.update({
+    const boletaCombustibleUpdate = await boletaCombustible.update({
       NUMERO_GUIA,
       PROVEEDOR_COMBUSTIBLE,
       MONTO_COMBUSTIBLE,
@@ -123,12 +127,15 @@ export async function updateBoletaCombustible(req, res) {
 }
 
 export async function deleteBoletaCombustible(req, res) {
-  const [numBoleta] = req.params;
+  const {numboleta} = req.params;
+  
   try {
     const deleteBoletaCombustible = await BoletaCombustible.destroy({
-      NUMERO_BOLETA_COMBUSTIBLE: numBoleta,
+      where: {
+        NUMERO_BOLETA_COMBUSTIBLE: numboleta,
+      }
     });
-
+    console.log(numboleta)
     if (deleteBoletaCombustible === 0) {
       return res.status(400).json({
         message: "No existe esta boleta de combustible",
@@ -141,6 +148,7 @@ export async function deleteBoletaCombustible(req, res) {
       count: deleteBoletaCombustible,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message:
         "Algo ocurrio cuando se queria eliminar esta boleta de combustible",
