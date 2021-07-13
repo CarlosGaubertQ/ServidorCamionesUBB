@@ -10,14 +10,14 @@ export async function getBanco(req, res) {
 }
 
 export async function addBanco(req, res) {
-  const [
+  const {
     CODIGO_BANCO,
     NOMBRE_BANCO,
     DIRECCION_INSTITUCION,
     FONO_BANCO,
     FAX_BANCO,
     DIGITO_BANCO,
-  ] = req.body;
+  } = req.body;
 
   try {
     const newBanco = await Banco.create(
@@ -31,6 +31,7 @@ export async function addBanco(req, res) {
       },
       {
         fields: [
+          "CODIGO_BANCO",
           "NOMBRE_BANCO",
           "DIRECCION_INSTITUCION",
           "FONO_BANCO",
@@ -57,14 +58,14 @@ export async function addBanco(req, res) {
 }
 
 export async function updateBanco(req, res) {
-  const [codigo] = req.params;
-  const [
-    NOMBRE_BANCO,
+  const {codigo} = req.params;
+  const 
+    {NOMBRE_BANCO,
     DIRECCION_INSTITUCION,
     FONO_BANCO,
     FAX_BANCO,
     DIGITO_BANCO,
-  ] = req.body;
+     } = req.body;
 
   const banco = await Banco.findOne({
     where: {

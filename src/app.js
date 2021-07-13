@@ -13,6 +13,8 @@ import carro from './routes/carro.routes'
 import chofer from './routes/chofer.routes'
 import oTMantencion from './routes/oTMantencion.routes'
 import tarjetaCredito from './routes/tarjetaCredito.routes'
+import mantencionNormal from './routes/mantencionNormal.routes'
+import programaDeMantencion from './routes/programaDeMantencion.routes'
 //middlewares
 app.use(json())
 app.use(morgan('dev'))
@@ -33,4 +35,7 @@ app.use('/api/banco',banco)
 app.use('/api/chofer',chofer)
 app.use('/api/otmantencion',oTMantencion)
 app.use('/api/tarjetacredito',tarjetaCredito)
+app.use('/api/mantencionnormal', mantencionNormal)
+app.use('/api/programademantencion', programaDeMantencion)
+
 export default app;
