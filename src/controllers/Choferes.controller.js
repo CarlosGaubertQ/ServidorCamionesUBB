@@ -10,7 +10,7 @@ export async function getChoferes(req, res) {
 }
 
 export async function addChoferes(req, res) {
-  const [
+  const {
     RUT_EMPLEADO,
     NRO_LICENCIA_CONDUCIR,
     CODIGO_CUENTA,
@@ -28,7 +28,7 @@ export async function addChoferes(req, res) {
     FECHA_NACIMIENTO,
     DIGITO_CONDUCTOR,
     PORCENTAJE_PARTICIPACION,
-  ] = req.body;
+   } = req.body;
 
   try {
     const newChofer = await Choferes.create(
@@ -92,8 +92,8 @@ export async function addChoferes(req, res) {
 }
 
 export async function updateChofer(req, res) {
-  const [rut] = req.params;
-  const [
+  const {rut} = req.params;
+  const {
     NRO_LICENCIA_CONDUCIR,
     CODIGO_CUENTA,
     NOMBRE_EMPLEADO,
@@ -110,14 +110,14 @@ export async function updateChofer(req, res) {
     FECHA_NACIMIENTO,
     DIGITO_CONDUCTOR,
     PORCENTAJE_PARTICIPACION,
-  ] = req.body;
+   } = req.body;
 
   const chofer = await Choferes.findOne({
     where: {
       RUT_EMPLEADO: rut,
     },
   });
-
+  console.log("holi")
   if (chofer === null) {
     res
       .status(200)
@@ -153,7 +153,7 @@ export async function updateChofer(req, res) {
 
 export async function deleteChofer(req, res) {
   try {
-    const [rut] = req.params;
+    const {rut} = req.params;
     const deleteChofer = await Choferes.destroy({
       where: {
         RUT_EMPLEADO: rut,

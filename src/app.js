@@ -15,13 +15,13 @@ import oTMantencion from './routes/oTMantencion.routes'
 import tarjetaCredito from './routes/tarjetaCredito.routes'
 import mantencionNormal from './routes/mantencionNormal.routes'
 import programaDeMantencion from './routes/programaDeMantencion.routes'
+import obra from './routes/obra.routes'
 //middlewares
 app.use(json())
 app.use(morgan('dev'))
 app.use(cors())
 
 app.set('port', process.env.PORT || 4000)
-
 
 
 //routes
@@ -37,5 +37,6 @@ app.use('/api/otmantencion',oTMantencion)
 app.use('/api/tarjetacredito',tarjetaCredito)
 app.use('/api/mantencionnormal', mantencionNormal)
 app.use('/api/programademantencion', programaDeMantencion)
+app.use('/api/obra', obra)
 
 export default app;
