@@ -52,7 +52,7 @@ export async function addChoferes(req, res) {
         PORCENTAJE_PARTICIPACION,
       },
       {
-        FECHA_CONTRATO,
+      
         fields: [
           "RUT_EMPLEADO",
           "NRO_LICENCIA_CONDUCIR",
@@ -117,7 +117,6 @@ export async function updateChofer(req, res) {
       RUT_EMPLEADO: rut,
     },
   });
-  console.log("holi")
   if (chofer === null) {
     res
       .status(200)

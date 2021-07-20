@@ -16,6 +16,10 @@ import tarjetaCredito from './routes/tarjetaCredito.routes'
 import mantencionNormal from './routes/mantencionNormal.routes'
 import programaDeMantencion from './routes/programaDeMantencion.routes'
 import obra from './routes/obra.routes'
+import camionChofer from './routes/camionChofer.routes'
+import sueldoChofer from './routes/sueldoChofer.routes'
+import eventoChofer from './routes/eventoChofer.routes'
+import historiaChofer from './routes/historiaChofer.routes'
 //middlewares
 app.use(json())
 app.use(morgan('dev'))
@@ -38,5 +42,8 @@ app.use('/api/tarjetacredito',tarjetaCredito)
 app.use('/api/mantencionnormal', mantencionNormal)
 app.use('/api/programademantencion', programaDeMantencion)
 app.use('/api/obra', obra)
-
+app.use('/api/camionchofer', camionChofer)
+app.use('/api/sueldochofer', sueldoChofer)
+app.use('/api/eventochofer', eventoChofer)
+app.use('/api/historiachofer', historiaChofer)
 export default app;
