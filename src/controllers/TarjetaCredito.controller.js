@@ -50,7 +50,7 @@ export async function addTarjetaCredito(req, res) {
 }
 
 export async function updateTarjetaCredito(req, res) {
-  const [codigo] = req.params;
+  const { codigo } = req.params;
   const { TOPE_TARJETA, ESTADO_TARJETA, RUT_EMPLEADO } = req.body;
 
   const tarjetaCredito = await TarjetaCredito.findOne({
@@ -65,7 +65,9 @@ export async function updateTarjetaCredito(req, res) {
       .json({ message: "No se encontro esta tarjeta de credito", data: [] });
   } else {
     const tarjetaCreditoUpdate = await tarjetaCredito.update({
-      TOPE_TARJETA, ESTADO_TARJETA, RUT_EMPLEADO 
+      TOPE_TARJETA,
+      ESTADO_TARJETA,
+      RUT_EMPLEADO,
     });
     return res.status(200).json({
       message: "Tarjeta de credito actualizada correctamente",
@@ -74,30 +76,30 @@ export async function updateTarjetaCredito(req, res) {
   }
 }
 
-
 export async function deleteTarjetaCredito(req, res) {
   try {
-    const [codigo] = req.params;
+    const { codigo } = req.params;
     const deleteTarjetaCredito = await TarjetaCredito.destroy({
       where: {
         CODIGO_TARJETA: codigo,
       },
     });
     if (deleteTarjetaCredito === 0) {
-      return res
-        .status(400)
-        .json({
-          message: "No se encontro esta tarjeta de credito",
-          count: deleteTarjetaCredito,
-        });
+      return res.status(400).json({
+        message: "No se encontro esta tarjeta de credito",
+        count: deleteTarjetaCredito,
+      });
     }
     res
-    .status(200)
-    .json({ message: "Tarjeta de credito eliminada correctamente", count: deleteTarjetaCredito });
+      .status(200)
+      .json({
+        message: "Tarjeta de credito eliminada correctamente",
+        count: deleteTarjetaCredito,
+      });
   } catch (error) {
     res.status(500).json({
-        message: "Algo ocurrio cuando se queria eliminar esta tarjeta de credito",
-        count: 0,
-      });
+      message: "Algo ocurrio cuando se queria eliminar esta tarjeta de credito",
+      count: 0,
+    });
   }
 }

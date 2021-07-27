@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 import moment from 'moment'
 const HistoriaChofer = sequelize.define(
-  "evento_chofer",
+  "historia_chofer",
   {
     CODIGO_EVENTO: {
       type: Sequelize.INTEGER,

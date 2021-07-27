@@ -20,6 +20,10 @@ import camionChofer from './routes/camionChofer.routes'
 import sueldoChofer from './routes/sueldoChofer.routes'
 import eventoChofer from './routes/eventoChofer.routes'
 import historiaChofer from './routes/historiaChofer.routes'
+import empleado from './routes/empleado.routes'
+import costoDistribuir from './routes/costoDistribuir.routes'
+import recorrido from './routes/recorrido.routes'
+import tarifa from './routes/tarifa.routes'
 //middlewares
 app.use(json())
 app.use(morgan('dev'))
@@ -46,4 +50,8 @@ app.use('/api/camionchofer', camionChofer)
 app.use('/api/sueldochofer', sueldoChofer)
 app.use('/api/eventochofer', eventoChofer)
 app.use('/api/historiachofer', historiaChofer)
+app.use('/api/empleado', empleado)
+app.use('/api/costodistribuir',costoDistribuir)
+app.use('/api/recorrido',recorrido)
+app.use('/api/tarifa', tarifa)
 export default app;
