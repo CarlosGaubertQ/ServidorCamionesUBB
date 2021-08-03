@@ -43,12 +43,15 @@ const Programa = sequelize.define(
     },
     CODIGO_VIAJE: {
       type: Sequelize.INTEGER,
+      primaryKey: true,
     },
     FECHA_VIAJE: {
       type: Sequelize.DATE,
+      primaryKey: true,
     },
     HORA_SALIDA_VIAJE: {
       type: Sequelize.TEXT,
+      primaryKey: true,
     },
     PRODUCTO: {
       type: Sequelize.TEXT,
@@ -58,6 +61,7 @@ const Programa = sequelize.define(
     },
     CODIGO_OBRA: {
       type: Sequelize.INTEGER,
+      primaryKey: true,
     },
     Formula: {
       type: Sequelize.INTEGER,

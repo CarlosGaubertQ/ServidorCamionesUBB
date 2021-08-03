@@ -24,6 +24,7 @@ import empleado from './routes/empleado.routes'
 import costoDistribuir from './routes/costoDistribuir.routes'
 import recorrido from './routes/recorrido.routes'
 import tarifa from './routes/tarifa.routes'
+import programa from './routes/programa.routes'
 //middlewares
 app.use(json())
 app.use(morgan('dev'))
@@ -54,4 +55,5 @@ app.use('/api/empleado', empleado)
 app.use('/api/costodistribuir',costoDistribuir)
 app.use('/api/recorrido',recorrido)
 app.use('/api/tarifa', tarifa)
+app.use('/api/programa', programa)
 export default app;

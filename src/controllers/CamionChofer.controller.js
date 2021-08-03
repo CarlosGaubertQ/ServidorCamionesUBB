@@ -25,6 +25,20 @@ export async function getCamionChoferByPC(req, res) {
   }
 }
 
+export async function getCamionChoferByP(req, res) {
+  try {
+    const {patente} = req.params;
+    const camionChofer = await CamionChofer.findAll({
+      where: {
+        Patente_Camion: patente
+      }
+    });
+    res.status(200).json({ data: camionChofer });
+  } catch (error) {
+    res.status(500).send({ data: error });
+  }
+}
+
 export async function addCamionChofer(req, res) {
   const { FechaDesde, FechaHasta, Patente_Camion, Rut_Conductor } = req.body;
 

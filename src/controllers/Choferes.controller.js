@@ -9,6 +9,18 @@ export async function getChoferes(req, res) {
   }
 }
 
+export async function getChoferesByRut(req, res) {
+  try {
+    const {rut} = req.params;
+    const choferes = await Choferes.findAll({where: {
+      RUT_EMPLEADO: rut
+    }});
+    res.status(200).json({ data: choferes });
+  } catch (error) {
+    res.status(500).send({ data: error });
+  }
+}
+
 export async function addChoferes(req, res) {
   const {
     RUT_EMPLEADO,

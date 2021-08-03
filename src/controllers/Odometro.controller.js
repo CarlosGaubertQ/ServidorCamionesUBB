@@ -67,14 +67,31 @@ export async function updateOdometro(req, res) {
     const odometro = await Odometro.findOne({
       where: {
         PATENTE_CAMION: patente,
-        FECHA_ODOMETRO: new Date(fecha),
+        FECHA_ODOMETRO: fecha,
       },
     });
 
     if (odometro === null) {
-      res
-        .status(200)
-        .json({ message: "No se encontro este odometro", data: ["eqweqw"] });
+      const newOdometro = await Odometro.create(
+        {
+          PATENTE_CAMION: patente,
+          ODOMETRO_CAMION,
+          FECHA_ODOMETRO: fecha,
+        },
+        { fields: ["PATENTE_CAMION", "ODOMETRO_CAMION", "FECHA_ODOMETRO"] }
+      );
+
+      if (newOdometro) {
+        res.status(200).send({
+          message: "Odómetro agregado correctamente",
+          data: newOdometro,
+        });
+      } else {
+        res.status(500).send({
+          message: "Ya existe el registro del odómetro en esta fecha",
+          data: newOdometro,
+        });
+      }
     } else {
       const odometroUpdate = await odometro.update({ ODOMETRO_CAMION });
 

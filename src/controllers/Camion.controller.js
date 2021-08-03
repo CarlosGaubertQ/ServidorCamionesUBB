@@ -152,6 +152,7 @@ export async function updateCamion(req, res) {
     NRO_CAMION,
     NRO_CHASIS,
     NRO_EJES,
+    Patente_Carro
   } = req.body;
 
   const camion = await Camion.findOne({
@@ -188,6 +189,7 @@ export async function updateCamion(req, res) {
       NRO_CAMION,
       NRO_CHASIS,
       NRO_EJES,
+      Patente_Carro
     });
 
     return res.status(200).json({

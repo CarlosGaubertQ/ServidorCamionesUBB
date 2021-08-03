@@ -1,5 +1,8 @@
 import Carro from "../models/Carro";
+import Camion from '../models/Camion'
 import moment from 'moment'
+import {Op} from 'Sequelize'
+
 export async function getCarro(req, res) {
   try {
     const carro = await Carro.findAll();
@@ -7,6 +10,24 @@ export async function getCarro(req, res) {
   } catch (error) {
     res.status(500).send({ data: error });
   }
+}
+
+export async function getCarroSinCamion(req, res) {
+    try {
+      const carro = await Carro.findAll();
+      const camionSinCarro = await Camion.findAll({ where:{
+        Patente_Carro: {[Op.ne]: null}
+      }})
+
+      let patentesCarrosUsada = []
+      camionSinCarro.map((carri) => patentesCarrosUsada.push(carri.Patente_Carro) )
+
+      var resultado = carro.filter(item => !patentesCarrosUsada.includes(item.PATENTE_CARRO))
+
+      res.status(200).json({ data: resultado });
+    } catch (error) {
+      res.status(500).send({ data: error });
+    }
 }
 
 export async function addCarro(req, res) {
