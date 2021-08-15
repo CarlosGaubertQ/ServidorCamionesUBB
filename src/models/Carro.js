@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
-
+import moment from 'moment'
 const Carro = sequelize.define(
   "carro",
   {
@@ -13,6 +13,9 @@ const Carro = sequelize.define(
     },
     FECHA_DE_COMPRA_CARRO: {
       type: Sequelize.DATE,
+      get: function() {
+        return moment(this.getDataValue('FECHA_DE_COMPRA_CARRO')).add(1,'days').format('DD-MM-YYYY')
+      }
     },
     VALOR_CARRO: {
       type: Sequelize.INTEGER,

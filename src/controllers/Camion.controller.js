@@ -1,8 +1,21 @@
 import Camion from "../models/Camion";
-
+import {Op} from 'Sequelize'
 export async function getCamiones(req, res) {
   try {
     const camiones = await Camion.findAll();
+    res.status(200).json({ data: camiones });
+  } catch (error) {
+    res.status(500).send({ data: error });
+  }
+}
+
+export async function getCamionesCarro(req, res) {
+  try {
+    const camiones = await Camion.findAll({ where:{
+      Patente_Carro: {
+        [Op.ne]: null
+      }
+    }});
     res.status(200).json({ data: camiones });
   } catch (error) {
     res.status(500).send({ data: error });

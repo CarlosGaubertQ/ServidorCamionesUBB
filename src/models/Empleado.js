@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
-
+import moment from 'moment'
 const Empleado = sequelize.define(
   "empleado",
   {
@@ -34,6 +34,9 @@ const Empleado = sequelize.define(
     },
     FECHA_CONTRATO: {
       type: Sequelize.DATE,
+      get: function() {
+        return moment(this.getDataValue('FECHA_CONTRATO')).add(1,'days').format('DD-MM-YYYY')
+      }
     },
     DIGITO_EMPLEADO: {
       type: Sequelize.TEXT,

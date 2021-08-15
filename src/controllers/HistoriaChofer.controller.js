@@ -10,6 +10,8 @@ export async function getHistoriaChofer(req, res) {
   }
 }
 
+
+
 export async function getHistoriaChoferByChofer(req, res) {
   try {
     const { rut } = req.params;

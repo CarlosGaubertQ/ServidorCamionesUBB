@@ -16,6 +16,15 @@ export async function getRecorrido(req, res) {
   }
 }
 
+export async function getAllRecorrido(req, res) {
+  try {
+    const recorrido = await Recorrido.findAll();
+    res.status(200).json({ data: recorrido });
+  } catch (error) {
+    res.status(500).send({ data: error });
+  }
+}
+
 export async function getRecorridoByOrigen(req, res) {
   const {origen} = req.params;
   try {

@@ -1,4 +1,5 @@
 import express,{json} from 'express'
+import 'regenerator-runtime/runtime'
 import morgan from 'morgan'
 import cors from 'cors'
 const app = express()
@@ -57,3 +58,4 @@ app.use('/api/recorrido',recorrido)
 app.use('/api/tarifa', tarifa)
 app.use('/api/programa', programa)
 export default app;
+module.exports = app;

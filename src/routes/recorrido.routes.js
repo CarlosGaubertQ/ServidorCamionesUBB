@@ -1,8 +1,9 @@
 import {Router} from 'express'
-import {getRecorrido,getRecorridoByOrigen ,getRecorridoByOrigenSeccion, addRecorrido, updateRecorrido, deleteRecorrido } from '../controllers/Recorrido.controller'
+import {getRecorrido, getAllRecorrido,getRecorridoByOrigen ,getRecorridoByOrigenSeccion, addRecorrido, updateRecorrido, deleteRecorrido } from '../controllers/Recorrido.controller'
 const router = Router()
 
 router.get('/', getRecorrido)
+router.get('/all/', getAllRecorrido)
 router.get('/:origen', getRecorridoByOrigen)
 router.get('/destino/:origen&:seccion', getRecorridoByOrigenSeccion)
 router.post('/', addRecorrido)
