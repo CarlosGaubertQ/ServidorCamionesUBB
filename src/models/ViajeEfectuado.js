@@ -1,15 +1,16 @@
 import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 import moment from 'moment'
-const Programa = sequelize.define(
-  "programa",
+const ViajeEfectuado = sequelize.define(
+  "viaje_efectuado",
   {
+    NUMERO_GUIA_DESPACHO: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+    },
     PATENTE_CAMION: {
       type: Sequelize.TEXT,
       primaryKey: true,
-    },
-    CODIGO_SERVICIO: {
-      type: Sequelize.INTEGER,
     },
     RUT_EMPLEADO: {
       type: Sequelize.INTEGER,
@@ -20,11 +21,11 @@ const Programa = sequelize.define(
     PARTIDA: {
       type: Sequelize.TEXT,
     },
-    LLEGADA: {
-      type: Sequelize.TEXT,
-    },
     SECCION: {
       type: Sequelize.INTEGER,
+    },
+    LLEGADA: {
+      type: Sequelize.TEXT,
     },
     CLIENTE: {
       type: Sequelize.INTEGER,
@@ -54,30 +55,48 @@ const Programa = sequelize.define(
     },
     HORA_SALIDA_VIAJE: {
       type: Sequelize.TEXT,
-      primaryKey: true,
-    },
-    PRODUCTO: {
-      type: Sequelize.TEXT,
     },
     HORA_LLEGADA_VIAJE: {
       type: Sequelize.TEXT,
     },
+    PRODUCTO: {
+      type: Sequelize.TEXT,
+    },
     CODIGO_OBRA: {
       type: Sequelize.INTEGER,
-      primaryKey: true,
+    },
+    PRECIO_UNITARIO_CARGA_CAMION: {
+      type: Sequelize.DOUBLE,
+    },
+    PRECIO_UNITARIO_CARGA_CARRO: {
+      type: Sequelize.DOUBLE,
+    },
+    ODOMETRO_SALIDA: {
+      type: Sequelize.INTEGER,
+    },
+    ODOMETRO_LLEGADA: {
+      type: Sequelize.INTEGER,
+    },
+    OTROS_COSTOS: {
+      type: Sequelize.INTEGER,
+    },
+    KILOMETRAJE_CAMINO_RIPIO: {
+      type: Sequelize.DOUBLE,
+    },
+    KILOMETRAJE_CAMINO_PAVIMENTO: {
+      type: Sequelize.DOUBLE,
     },
     Formula: {
       type: Sequelize.INTEGER,
     },
-    Observacion: {
-      type: Sequelize.TEXT,
-    },
-    Viajerealizado: {
+    OBSERVACION: {
       type: Sequelize.TEXT,
     },
     Num_PViaje: {
       type: Sequelize.INTEGER,
     },
+
+
   },
   {
     timestamps: false,
@@ -85,4 +104,4 @@ const Programa = sequelize.define(
   }
 );
 
-export default Programa;
+export default ViajeEfectuado;

@@ -1,5 +1,6 @@
 import Recorrido from "../models/Recorrido";
 import Sequelize from "sequelize";
+
 export async function getRecorrido(req, res) {
   try {
     const recorrido = await Recorrido.findAll({
@@ -66,6 +67,22 @@ export async function getRecorridoByOrigenSeccion(req, res) {
       where:{
         Origen: origen,
         Seccion: seccion
+      }
+    });
+    res.status(200).json({ data: recorrido });
+  } catch (error) {
+    res.status(500).send({ data: error });
+  }
+}
+
+export async function getRecorridoByOrigenSeccionLlegada(req, res) {
+  const {origen,seccion, destino} = req.params;
+  try {
+    const recorrido = await Recorrido.findAll({  
+      where:{
+        Origen: origen,
+        Seccion: seccion,
+        Destino: destino
       }
     });
     res.status(200).json({ data: recorrido });

@@ -9,6 +9,19 @@ export async function getPrograma(req, res) {
   }
 }
 
+export async function getProgramaRealizado(req, res) {
+  try {
+    const programa = await Programa.findAll({
+      where:{
+        Viajerealizado: "NO"
+      }
+    });
+    res.status(200).json({ data: programa });
+  } catch (error) {
+    res.status(500).send({ data: error });
+  }
+}
+
 export async function getCodigoViaje(req, res) {
   try {
     const programa = await Programa.max('CODIGO_VIAJE')
@@ -126,6 +139,7 @@ export async function addPrograma(req, res) {
 
 export async function updatePrograma(req, res) {
     const {patente, viaje, fecha, hora, obra} = req.params;
+    console.log(req.params)
     const {
         CODIGO_SERVICIO,
         RUT_EMPLEADO,
@@ -145,12 +159,14 @@ export async function updatePrograma(req, res) {
         Viajerealizado,
         Num_PViaje,
      } = req.body;
+
+     const formatFecha = moment(fecha, "DD-MM-YYYY").format("YYYY-MM-DD");
   
     const programa = await Programa.findOne({
       where: {
         PATENTE_CAMION: patente,
         CODIGO_VIAJE: viaje,
-        FECHA_VIAJE: fecha,
+        FECHA_VIAJE: new Date(formatFecha),
         HORA_SALIDA_VIAJE: hora,
         CODIGO_OBRA: obra
       },

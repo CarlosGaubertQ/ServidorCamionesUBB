@@ -1,5 +1,5 @@
 import Choferes from "../models/Choferes";
-
+import sequelize from 'Sequelize'
 export async function getChoferes(req, res) {
   try {
     const choferes = await Choferes.findAll();
@@ -9,12 +9,32 @@ export async function getChoferes(req, res) {
   }
 }
 
+export async function getChoferesAvisoLincencia(req, res) {
+  try {
+
+    var fecha = new Date()
+    fecha.setDate(fecha.getDate() - 35)
+    const choferes = await Choferes.findAll({
+      where: sequelize.where(sequelize.fn('datediff', sequelize.fn("NOW") , sequelize.col('FECHA_CONTROL_LICENCIA')), {
+        $lt : 35 // OR [Op.gt] : 5
+    })
+      
+    });
+    res.status(200).json({ data: choferes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ data: error });
+  }
+}
+
 export async function getChoferesByRut(req, res) {
   try {
-    const {rut} = req.params;
-    const choferes = await Choferes.findAll({where: {
-      RUT_EMPLEADO: rut
-    }});
+    const { rut } = req.params;
+    const choferes = await Choferes.findAll({
+      where: {
+        RUT_EMPLEADO: rut
+      }
+    });
     res.status(200).json({ data: choferes });
   } catch (error) {
     res.status(500).send({ data: error });
@@ -40,7 +60,7 @@ export async function addChoferes(req, res) {
     FECHA_NACIMIENTO,
     DIGITO_CONDUCTOR,
     PORCENTAJE_PARTICIPACION,
-   } = req.body;
+  } = req.body;
 
   try {
     const newChofer = await Choferes.create(
@@ -64,7 +84,7 @@ export async function addChoferes(req, res) {
         PORCENTAJE_PARTICIPACION,
       },
       {
-      
+
         fields: [
           "RUT_EMPLEADO",
           "NRO_LICENCIA_CONDUCIR",
@@ -104,7 +124,7 @@ export async function addChoferes(req, res) {
 }
 
 export async function updateChofer(req, res) {
-  const {rut} = req.params;
+  const { rut } = req.params;
   const {
     NRO_LICENCIA_CONDUCIR,
     CODIGO_CUENTA,
@@ -122,7 +142,7 @@ export async function updateChofer(req, res) {
     FECHA_NACIMIENTO,
     DIGITO_CONDUCTOR,
     PORCENTAJE_PARTICIPACION,
-   } = req.body;
+  } = req.body;
 
   const chofer = await Choferes.findOne({
     where: {
@@ -164,7 +184,7 @@ export async function updateChofer(req, res) {
 
 export async function deleteChofer(req, res) {
   try {
-    const {rut} = req.params;
+    const { rut } = req.params;
     const deleteChofer = await Choferes.destroy({
       where: {
         RUT_EMPLEADO: rut,
