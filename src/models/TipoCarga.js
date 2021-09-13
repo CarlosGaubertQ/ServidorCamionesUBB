@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 
 const TipoCarga = sequelize.define(
-  "tipo_carga",
+  "TIPO_CARGA",
   {
     CODIGO_CARGA: {
       type: Sequelize.INTEGER,

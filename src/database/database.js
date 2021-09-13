@@ -1,11 +1,11 @@
 import Sequelize from 'sequelize'
-
+require('dotenv').config()
 export const sequelize = new Sequelize(
-    'camiones',
-    'root',
-    '',
+    process.env.DATABASE,
+    process.env.USER,
+    process.env.PASSWORD,
     {
-        host: 'localhost',
+        host: process.env.HOST,
         dialect: 'mysql',
         pool:{
             max: 5,

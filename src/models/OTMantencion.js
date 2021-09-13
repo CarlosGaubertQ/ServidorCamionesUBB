@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 
 const OTMantencion = sequelize.define(
-  "orden_de_trabajo_de_mantencion",
+  "ORDEN_DE_TRABAJO_DE_MANTENCION",
   {
     CODIGO_OT: {
       type: Sequelize.INTEGER,

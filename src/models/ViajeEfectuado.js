@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 import moment from 'moment'
 const ViajeEfectuado = sequelize.define(
-  "viaje_efectuado",
+  "VIAJE_EFECTUADO",
   {
     NUMERO_GUIA_DESPACHO: {
       type: Sequelize.INTEGER,

@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 
 const Banco = sequelize.define(
-  "banco",
+  "BANCO",
   {
     CODIGO_BANCO: {
       type: Sequelize.TEXT,

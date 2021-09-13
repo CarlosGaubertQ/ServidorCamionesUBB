@@ -1,5 +1,5 @@
 import Choferes from "../models/Choferes";
-import sequelize from 'Sequelize'
+import {Op} from 'Sequelize'
 export async function getChoferes(req, res) {
   try {
     const choferes = await Choferes.findAll();
@@ -11,13 +11,12 @@ export async function getChoferes(req, res) {
 
 export async function getChoferesAvisoLincencia(req, res) {
   try {
-
-    var fecha = new Date()
-    fecha.setDate(fecha.getDate() - 35)
     const choferes = await Choferes.findAll({
-      where: sequelize.where(sequelize.fn('datediff', sequelize.fn("NOW") , sequelize.col('FECHA_CONTROL_LICENCIA')), {
-        $lt : 35 // OR [Op.gt] : 5
-    })
+      where:{
+        FECHA_CONTROL_LICENCIA:{
+          [Op.lt]: new Date(new Date() - 24 * 60 * 60 * 1000)
+        }
+      }
       
     });
     res.status(200).json({ data: choferes });

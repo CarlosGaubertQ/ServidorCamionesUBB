@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 import moment from 'moment'
 const SueldosChoferes = sequelize.define(
-  "sueldo_choferes",
+  "SUELDO_CHOFERES",
   {
     RUT_CHOFER: {
       type: Sequelize.INTEGER,

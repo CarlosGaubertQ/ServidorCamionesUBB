@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 import moment from 'moment'
 const Empleado = sequelize.define(
-  "empleado",
+  "EMPLEADO",
   {
     RUT_EMPLEADO: {
       type: Sequelize.INTEGER,

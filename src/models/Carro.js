@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 import moment from 'moment'
 const Carro = sequelize.define(
-  "carro",
+  "CARRO",
   {
     PATENTE_CARRO: {
       type: Sequelize.TEXT,

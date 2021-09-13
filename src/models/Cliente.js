@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 
 const Cliente = sequelize.define(
-  "cliente",
+  "CLIENTE",
   {
     CODIGO_CLIENTE: {
       type: Sequelize.INTEGER,

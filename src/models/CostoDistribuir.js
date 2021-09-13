@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 import moment from 'moment'
 const CostoDistribuir = sequelize.define(
-  "costo_distribuir",
+  "Costo_distribuir",
   {
     FECHA_PAGO: {
       type: Sequelize.DATE,

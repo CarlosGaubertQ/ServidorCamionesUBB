@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 
 const Obra = sequelize.define(
-  "obra",
+  "OBRA",
   {
     CODIGO_OBRA: {
       type: Sequelize.INTEGER,

@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 
 const ProgramaDeMantencion = sequelize.define(
-  "programa_de_mantencion",
+  "PROGRAMA_DE_MANTENCION",
   {
     CODIGO_MANTENCION: {
       type: Sequelize.TEXT,

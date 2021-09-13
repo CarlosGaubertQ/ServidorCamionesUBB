@@ -1,8 +1,31 @@
 import ViajeEfectuado from '../models/ViajeEfectuado'
-
+import sequelize from 'sequelize'
 export async function getAllViajeEfectuados(req, res) {
     try {
         const viajeEfectuado = await ViajeEfectuado.findAll();
+        res.status(200).json({ data: viajeEfectuado });
+    } catch (error) {
+        res.status(500).send({ data: error });
+    }
+}
+
+export async function getProduccionTotal(req, res) {
+    const {anio, mes} = req.params
+    try {
+        const viajeEfectuado = await ViajeEfectuado.findAll({
+            attributes: [
+                [sequelize.fn('sum', sequelize.col('PRECIO_UNITARIO_CARGA_CAMION')), 'Total precio unitario camión'],
+                [sequelize.fn('sum', sequelize.col('PRECIO_UNITARIO_CARGA_CARRO')), 'Total precio unitario carro'],
+                [sequelize.fn('sum', sequelize.col('ODOMETRO_SALIDA')), 'Total odometro salida'],
+                [sequelize.fn('sum', sequelize.col('ODOMETRO_LLEGADA')), 'Total odometro llegada'],
+                [sequelize.fn('sum', sequelize.col('OTROS_COSTOS')), 'Total otros costos'],
+                [sequelize.fn('sum', sequelize.col('KILOMETRAJE_CAMINO_RIPIO')), 'Total kilometraje ripio'],
+                [sequelize.fn('sum', sequelize.col('KILOMETRAJE_CAMINO_PAVIMENTO')), 'Total kilometraje pavimento'],
+                [sequelize.fn('sum', sequelize.col('CANTIDAD_CARGA_CAMION')), 'Total cantidad carga camión'],
+                [sequelize.fn('sum', sequelize.col('CANTIDAD_CARGA_CARRO')), 'Total cantidad carga carro']
+            ],
+            where: [sequelize.where(sequelize.fn('YEAR', sequelize.col('FECHA_VIAJE')), anio),sequelize.where(sequelize.fn('MONTH', sequelize.col('FECHA_VIAJE')), mes)]
+        });
         res.status(200).json({ data: viajeEfectuado });
     } catch (error) {
         res.status(500).send({ data: error });

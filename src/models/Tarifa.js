@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 
 const Tarifa = sequelize.define(
-  "tarifa",
+  "Tarifa",
   {
     Codigo_Cliente: {
       type: Sequelize.INTEGER,

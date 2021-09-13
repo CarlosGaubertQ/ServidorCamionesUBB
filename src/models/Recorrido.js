@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 
 const Recorrido = sequelize.define(
-  "recorrido",
+  "RECORRIDO",
   {
     Origen: {
       type: Sequelize.TEXT,

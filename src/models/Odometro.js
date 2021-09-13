@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 import moment from "moment"
 const Odometro = sequelize.define(
-  "odometro_mensual",
+  "ODOMETRO_MENSUAL",
   {
     PATENTE_CAMION: {
       type: Sequelize.TEXT,

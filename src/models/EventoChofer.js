@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 const EventoChofer = sequelize.define(
-  "evento_chofer",
+  "EVENTO_CHOFER",
   {
     CODIGO_EVENTO: {
       type: Sequelize.INTEGER,

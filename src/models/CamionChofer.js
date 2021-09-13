@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 import moment from 'moment'
 const CamionChofer = sequelize.define(
-  "camionchofer",
+  "CamionChofer",
   {
     FechaDesde: {
       type: Sequelize.DATE,

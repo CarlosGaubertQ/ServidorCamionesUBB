@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 
 const BoletaCombustible = sequelize.define(
-  "boleta_combustible",
+  "BOLETA_COMBUSTIBLE",
   {
     NUMERO_BOLETA_COMBUSTIBLE: {
       type: Sequelize.INTEGER,

@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../database/database";
 
 const TarjetaCredito = sequelize.define(
-  "tarjeta_credito",
+  "TARJETA_CREDITO",
   {
     CODIGO_TARJETA: {
       type: Sequelize.TEXT,
