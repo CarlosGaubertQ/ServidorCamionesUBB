@@ -134,6 +134,7 @@ export async function addCamion(req, res) {
         .send({ message: "Ya existe este camión", data: newCamion });
     }
   } catch (error) {
+    console.log(error)
     return res.status(400).send({ message: "Ya existe este camión", data: [] });
   }
 }

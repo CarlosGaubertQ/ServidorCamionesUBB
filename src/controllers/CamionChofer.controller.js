@@ -52,8 +52,8 @@ export async function addCamionChofer(req, res) {
   try {
     const newCamionChofer = await CamionChofer.create(
       {
-        FechaDesde: formatFechaDesde,
-        FechaHasta: formatFechaHasta,
+        FechaDesde: new Date(formatFechaDesde),
+        FechaHasta: new Date(),
         Patente_Camion,
         Rut_Conductor,
       },
@@ -74,6 +74,7 @@ export async function addCamionChofer(req, res) {
       });
     }
   } catch (error) {
+    console.log(error)
     res.status(500).send({
       message: "Ya esta asignado el camion a este chofer",
       data: [],

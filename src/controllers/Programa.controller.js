@@ -130,6 +130,7 @@ export async function addPrograma(req, res) {
       });
     }
   } catch (error) {
+    console.log(error)
     return res
       .status(400)
       .send({ message: "Ya esta registrado este programa de viaje", data: [] });

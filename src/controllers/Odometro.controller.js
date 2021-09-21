@@ -67,10 +67,10 @@ export async function updateOdometro(req, res) {
     const odometro = await Odometro.findOne({
       where: {
         PATENTE_CAMION: patente,
-        FECHA_ODOMETRO: fecha,
+        FECHA_ODOMETRO: new Date(fecha),
       },
     });
-
+    console.log(odometro)
     if (odometro === null) {
       const newOdometro = await Odometro.create(
         {
@@ -129,6 +129,7 @@ export async function deleteOdometro(req, res) {
       count: deleteOdometro,
     });
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       message: "Algo ocurrio cuando se queria eliminar odómetro",
       count: 0,

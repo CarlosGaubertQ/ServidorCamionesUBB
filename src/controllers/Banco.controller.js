@@ -94,7 +94,7 @@ export async function updateBanco(req, res) {
 
 export async function deleteBanco(req, res) {
   try {
-    const [codigo] = req.params;
+    const {codigo} = req.params;
     const deleteBanco = await Banco.destroy({
       where: {
         CODIGO_BANCO: codigo,
@@ -110,6 +110,7 @@ export async function deleteBanco(req, res) {
       .status(200)
       .json({ message: "Banco eliminado correctamente", count: deleteBanco });
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       message: "Algo ocurrio cuando se queria eliminar este banco",
       count: 0,

@@ -107,7 +107,7 @@ export async function updateCarro(req, res) {
   });
 
   if (carro === null) {
-    res.status(200).json({ message: "No se encontro este carro", data: [] });
+    res.status(400).json({ message: "No se encontro este carro", data: [] });
   } else {
     const carroUpdate = await carro.update({
       TIPO_DE_CARRO,
